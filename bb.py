@@ -3,7 +3,7 @@
 
 import sys, pygame
 
-def main(width=1280, height=720, speedx=5, speedy=5, fps=60):
+def main(width=1920, height=1080, speedx=10, speedy=10, fps=60):
     pygame.init()
 
     size = width, height
@@ -12,11 +12,13 @@ def main(width=1280, height=720, speedx=5, speedy=5, fps=60):
 
     bgcolor = 0, 0, 0 # black
 
-    screen = pygame.display.set_mode(size)
+    screen = pygame.display.set_mode(size, pygame.FULLSCREEN, vsync=1)
     clock = pygame.time.Clock()
 
-    ball = pygame.image.load('intro_ball.gif')
+    ball = pygame.image.load('intro_ball.gif').convert_alpha()
     ballrect = ball.get_rect()
+
+    fps_range = [fps, 0]
 
     running = True
     while running:
@@ -36,6 +38,11 @@ def main(width=1280, height=720, speedx=5, speedy=5, fps=60):
         pygame.display.flip()
 
         clock.tick(fps)
+        # print(f'{clock.get_fps():.1f}')
+        if clock.get_fps():
+            fps_range[0] = min(fps_range[0], clock.get_fps())
+            fps_range[1] = max(fps_range[1], clock.get_fps())
+        print(f'fps_range={fps_range}')
 
     pygame.quit()
 
