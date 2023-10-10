@@ -205,7 +205,8 @@ def main():
         balls.draw(screen)
         players.draw(screen)
 
-        pygame.display.flip()
+        # pygame.display.flip()
+        pygame.display.update(None)
 
         # Make sure game run in 60 fps.
         clock.tick(FPS)
