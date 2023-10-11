@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""HP bar"""
+"""Red/Black block. Choose more colored bricks."""
 
 # import sys
 
@@ -7,10 +7,12 @@ import pygame
 
 pygame.init()
 
-pygame.display.set_caption('Red/Black project')
+COLORS = ('red', 'gray25')
+
+pygame.display.set_caption('Red/Black Blocks')
 SCREEN_W = 640
 SCREEN_H = 480
-screen = pygame.display.set_mode((SCREEN_W, SCREEN_H), pygame.SCALED)
+screen = pygame.display.set_mode((SCREEN_W, SCREEN_H))#, pygame.SCALED)
 print(f'window_size= {pygame.display.get_window_size()}')
 print(f'screen.get_rect= {screen.get_rect()}')
 
@@ -24,13 +26,15 @@ clock = pygame.time.Clock()
 text_area = (font.render(f'{MAX_HP}/{MAX_HP}', True, 'red')
              .get_rect(center=screen.get_rect().center))
 FPS = 60
+BOARD_SIZE = (5, 5)
+BOARD_BLOCK_SIZE = 50
 # pygame.key.set_repeat(1000 // FPS)
 
 def main():
     HP = 5
     # digit = len(str(MAX_HP))
     pushed = [False, False]
-    boards = make_boards()
+    boards = make_board(BOARD_SIZE[0], BOARD_SIZE[1])
     most_color = get_most_color(boards)
 
     while True:
@@ -43,7 +47,7 @@ def main():
         update_area = []
         update_area.append(drawHP(HP))
         update_area += (btn_rects := draw_buttons(pushed))
-        update_area.append(draw_boards(boards))
+        update_area.append(draw_board(boards))
         pygame.display.update(update_area)
 
         for event in pygame.event.get():
@@ -57,19 +61,19 @@ def main():
                 elif event.key == pygame.K_DOWN:
                     HP = decrease_hp(HP)
                 elif event.key == pygame.K_r:
-                    boards = make_boards()
+                    boards = make_board(BOARD_SIZE[0], BOARD_SIZE[1])
                     most_color = get_most_color(boards)
             elif event.type == pygame.MOUSEBUTTONUP:
                 pushed = [False, False]
                 x, y = event.pos
-                pick_color = ''
+                pick_color = None
                 if btn_rects[0].collidepoint(x, y):
-                    pick_color = 'red'
+                    pick_color = 0
                 elif btn_rects[1].collidepoint(x, y):
-                    pick_color = 'gray25'
+                    pick_color = 1
                 else:
                     continue
-                
+
                 if pick_color == most_color:
                     HP = increase_hp(HP)
                 else:
@@ -92,26 +96,25 @@ def decrease_hp(hp):
     return hp - 1 if hp > 0 else 0
 
 
-def make_boards():
+def make_board(w, h):
     import random
-
-    colors = ['red', 'gray25']
-    rows = cols = 5
-    return ([[random.choice(colors) for c in range(cols)] for r in range(rows)])
+    return ([[random.randrange(len(COLORS)) for x in range(w)]
+             for y in range(h)])
 
 
-def get_most_color(boards):
+def get_most_color(board):
     from collections import Counter
     counter = Counter()
-    for r in boards:
-        for c in r:
-            counter[c] += 1
+    for row in board:
+        for col in row:
+            counter[col] += 1
     return counter.most_common(1)[0][0]
 
 
-def draw_boards(boards):
-    size = 50
-    rows = cols = 5
+def draw_board(board):
+    size = BOARD_BLOCK_SIZE
+    rows = len(board)
+    cols = len(board[0])
     screen_size = screen.get_rect().size
     x = (screen_size[0] - cols * size) // 2
     y = (screen_size[1] - rows * size) // 2
@@ -119,22 +122,23 @@ def draw_boards(boards):
     for r in range(rows):
         for c in range(cols):
             pygame.draw.rect(screen, 
-                             boards[r][c],
+                             COLORS[board[r][c]],
                              (x + c * size, y + r * size, size, size))
     width = 4
     correct = width // 2
+    LINE_COLOR = 'whitesmoke'
     for r in range(1, rows):
         start_pos = (x, y + r * size)
         end_pos = (start_pos[0] + size * cols - correct, start_pos[1])
-        pygame.draw.line(screen, 'whitesmoke', start_pos, end_pos, width)
+        pygame.draw.line(screen, LINE_COLOR, start_pos, end_pos, width)
 
     for c in range(1, cols):
         start_pos = (x + c * size, y)
         end_pos = (start_pos[0], start_pos[1] + size * rows - correct)
-        pygame.draw.line(screen, 'whitesmoke', start_pos, end_pos, width)
+        pygame.draw.line(screen, LINE_COLOR, start_pos, end_pos, width)
 
-    return pygame.draw.rect(screen, 'whitesmoke', (x, y, cols * size, rows * size), width)
-    # return (x, y, cols * size, rows * size)
+    return pygame.draw.rect(screen, LINE_COLOR,
+                            (x, y, cols * size, rows * size), width)
 
 
 def drawHP(hp):
