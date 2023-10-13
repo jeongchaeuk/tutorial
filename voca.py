@@ -20,18 +20,22 @@ def read():
         print(e)
 
 
-def add(eng, kor):
-    book[eng] = kor
-
-
-def find(eng):
-    return book[eng]
-
-
-def main():
-    read()
-    print(book)
-
-
 if __name__ == '__main__':
-    main()
+    import sys
+
+    read()
+
+    params = sys.argv[1:]
+
+    if params:
+        if params[0] == '-a': # add
+            book[params[1]] = params[2]
+            write()
+        elif params[0] == '-r': # remove
+            try:
+                del book[params[1]]
+                write()
+            except KeyError:
+                pass
+
+    print(book)
