@@ -7,14 +7,15 @@ FILENAME = 'engbook.txt'
 def write():
     with open(FILENAME, 'wt', encoding='utf_8') as f:
         for k, v in book.items():
-            f.write(f'{k} {v}\n')
+            f.write(f'{k},{v}\n')
 
 
 def read():
     try:
         with open(FILENAME, 'rt', encoding='utf_8') as f:
             for line in f.readlines():
-                data = line.split()
+                line = line.strip()
+                data = line.split(sep=',')
                 book[data[0]] = data[1]
     except FileNotFoundError as e:
         print(e)
