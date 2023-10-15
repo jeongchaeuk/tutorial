@@ -3,11 +3,12 @@
 
 book = {}
 FILENAME = 'engbook.txt'
+SPLIT = '::'
 
 def write():
     with open(FILENAME, 'wt', encoding='utf_8') as f:
         for k, v in book.items():
-            f.write(f'{k},{v}\n')
+            f.write(f'{k}{SPLIT}{v}\n')
 
 
 def read():
@@ -15,10 +16,18 @@ def read():
         with open(FILENAME, 'rt', encoding='utf_8') as f:
             for line in f.readlines():
                 line = line.strip()
-                data = line.split(sep=',')
+                data = line.split(SPLIT)
                 book[data[0]] = data[1]
     except FileNotFoundError as e:
         print(e)
+
+
+def show_vocas():
+    print('='*30)
+    print(f'단어장 ({len(book)}) ver 2023.10.15')
+    print('='*30)
+    for k, v in book.items():
+        print(f'{k}\n{v}\n')
 
 
 if __name__ == '__main__':
@@ -39,4 +48,4 @@ if __name__ == '__main__':
             except KeyError:
                 pass
 
-    print(book)
+    show_vocas()
