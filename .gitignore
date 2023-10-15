@@ -161,3 +161,4 @@ cython_debug/
 
 data/
 engbook.txt
+*.bak
