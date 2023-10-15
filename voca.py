@@ -7,7 +7,8 @@ FILENAME = 'engbook.txt'
 
 def write(book):
     with open(FILENAME, 'wt', encoding='utf_8') as f:
-        json.dump(book, f, ensure_ascii=False)
+        json.dump(book, f, ensure_ascii=False, separators=(',', ':'),
+                  sort_keys=True)
 
 
 def read():
@@ -39,7 +40,7 @@ def main(params):
                 del book[params[1]]
                 write(book)
             except KeyError as e:
-                print(f'word {e} not found!')
+                print(f'{e} not found!')
 
     show_vocas(book)
 
