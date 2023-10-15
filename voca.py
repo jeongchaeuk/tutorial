@@ -1,28 +1,25 @@
 #!/usr/bin/env python
 """Vocabulary"""
 
-book = {}
-FILENAME = 'engbook.txt'
-SPLIT = '::'
+import json
 
-def write():
+FILENAME = 'engbook.txt'
+
+def write(book):
     with open(FILENAME, 'wt', encoding='utf_8') as f:
-        for k, v in book.items():
-            f.write(f'{k}{SPLIT}{v}\n')
+        json.dump(book, f, ensure_ascii=False)
 
 
 def read():
     try:
         with open(FILENAME, 'rt', encoding='utf_8') as f:
-            for line in f.readlines():
-                line = line.strip()
-                data = line.split(SPLIT)
-                book[data[0]] = data[1]
+            return json.load(f)
     except FileNotFoundError as e:
         print(e)
+    return None
 
 
-def show_vocas():
+def show_vocas(book):
     print('='*30)
     print(f'단어장 ({len(book)}) ver 2023.10.15')
     print('='*30)
@@ -30,22 +27,23 @@ def show_vocas():
         print(f'{k}\n{v}\n')
 
 
-if __name__ == '__main__':
-    import sys
-
-    read()
-
-    params = sys.argv[1:]
+def main(params):
+    book = read()
 
     if params:
         if params[0] == '-a': # add
             book[params[1]] = params[2]
-            write()
+            write(book)
         elif params[0] == '-r': # remove
             try:
                 del book[params[1]]
-                write()
-            except KeyError:
-                pass
+                write(book)
+            except KeyError as e:
+                print(f'word {e} not found!')
 
-    show_vocas()
+    show_vocas(book)
+
+
+if __name__ == '__main__':
+    import sys
+    main(sys.argv[1:])
