@@ -71,7 +71,7 @@ Draw one image onto another.
 
 Draws a source Surface onto this Surface.  
 The draw can be **positioned** with the `dest` argument.  
-The dest argument can either be a pair of coordinates representing the position of the `upper left corner` of the blit or a Rect, where the upper left corner of the rectangle will be used as the position for the blit.  
+The `dest` argument can either be a pair of coordinates representing the position of the `upper left corner` of the blit or a Rect, where the upper left corner of the rectangle will be used as the position for the blit.  
 The `size` of the destination rectangle does `not` effect the blit.
 
 An optional `area` rectangle can be passed as well.  
@@ -245,7 +245,7 @@ Set the alpha value for the full Surface image.
     set_alpha(value, flags=0) -> None
     set_alpha(None) -> None
 
-The alpha value is an **integer** from `0 to 255`, 0 is fully transparent and 255 is fully opaque.  
+The alpha value is an **integer** from `0 to 255`, `0` is fully `transparent` and `255` is fully `opaque`.  
 If `None` is passed for the alpha value, then **alpha blending** will be `disabled`, including per-pixel alpha.
 
 For a surface with per pixel alpha, blanket alpha is ignored and `None` is returned.
