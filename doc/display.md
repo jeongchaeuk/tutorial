@@ -299,8 +299,6 @@ This does not change the palette for the actual display Surface, only the palett
 If no palette argument is passed, the system default palette will be restored.  
 The palette is a sequence of `RGB` triplets.
 
-Changed in pygame 2.5.0: Added support for keyword arguments.
-
 ### .get_num_displays()
 
 Returns the number of available displays.
