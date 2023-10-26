@@ -92,16 +92,19 @@ When using an `pygame.OPENGL` display mode this will perform a gl buffer swap.
 
 ### .update()
 
+    update(rectangle=None) -> None
+    update(rectangle_list) -> None
+
 Update portions of the screen for software displays.  
 It allows only a portion of the screen to be updated, instead of the entire area.  
-If no argument is passed it updates the entire Surface area.
+If `no` argument is passed it updates the `entire` Surface area.
 
-Note that calling `display.update(None)` means `no` part of the window is updated.  
+Calling `display.update(None)` means `no` part of the window is updated.  
 Whereas `display.update()` means the `whole` window is updated.
 
 You can pass the function a single rectangle, or a sequence of rectangles.  
 It is more efficient to pass many rectangles at once than to call update multiple times with single or a partial list of rectangles.  
-If passing a sequence of rectangles it is safe to include None values in the list, which will be skipped.
+If passing a sequence of rectangles it is safe to include `None` values in the list, which will be `skipped`.
 
 This call **cannot** be used on `pygame.OPENGL` displays and will generate an `exception`.
 
