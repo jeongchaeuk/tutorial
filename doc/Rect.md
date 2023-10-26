@@ -175,7 +175,7 @@ Test if two rectangles `overlap`.
     collidelist(list) -> index
 
 Test whether the rectangle collides with any in a sequence of rectangles.  
-The index of the `first collision` found is returned.  
+The index of the `first` collision found is returned.  
 If `no` collisions are found an index of `-1` is returned.
 
 ### .collidelistall()
