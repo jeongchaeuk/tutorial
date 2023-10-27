@@ -341,9 +341,6 @@ The setsurface parameter defaults to None, but setcolor defaults to a color valu
 To **skip** drawing the **unset** bits, both `unsetsurface` and `unsetcolor` must be **None**.  
 The unsetsurface parameter defaults to None, but unsetcolor defaults to a color value and therefore must be set to None.
 
-
-
-
 [1]:https://www.pygame.org/docs/ref/mask.html
 [2]:/doc/sprite.md/#collide_mask
 [3]:#clear
