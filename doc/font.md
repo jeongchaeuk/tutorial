@@ -103,9 +103,9 @@ Both Unicode and char (byte) strings are accepted.
 For Unicode strings only `UCS-2` characters (`'\u0001'` to `'\uFFFF'`) were previously supported and any greater unicode codepoint would raise a `UnicodeError`.  
 Now, characters in the `UCS-4` range are supported.  
 For char strings a `LATIN1` encoding is assumed.  
-The **antialias** argument is a boolean.  
-The **color** argument is the color of the text.  
-The optional **background** argument is a color to use for the text background.  
+The `antialias` argument is a **boolean**.  
+The `color` argument is the color of the text.  
+The optional `background` argument is a color to use for the text background.  
 If `no` background is passed the area outside the text will be `transparent`.
 
 The Surface returned will be of the dimensions required to hold the text. (the same as those returned by `Font.size()`).  
