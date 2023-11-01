@@ -248,9 +248,12 @@ Set the alpha value for the full Surface image.
 The alpha value is an **integer** from `0 to 255`, `0` is fully `transparent` and `255` is fully `opaque`.  
 If `None` is passed for the alpha value, then **alpha blending** will be `disabled`, including per-pixel alpha.
 
-For a surface with per pixel alpha, blanket alpha is ignored and `None` is returned.
+For a surface with per pixel alpha, ***blanket alpha is ignored*** and `None` is returned.
 
 per-surface alpha can be combined with per-pixel alpha.
+
+The optional `flags` argument can be set to `pygame.RLEACCEL` to provide better performance on non accelerated displays.  
+An RLEACCEL Surface will be slower to modify, but quicker to blit as a source.
 
 ### .get_alpha()
 
