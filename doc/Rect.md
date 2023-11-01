@@ -166,6 +166,13 @@ Test if one rectangle is completely inside another.
 
 Test if a point is inside a rectangle.
 
+```python
+collidepoint(x, y) -> bool
+collidepoint((x,y)) -> bool
+```
+
+A point along the ***right or bottom edge*** is `not` ***considered*** to be inside the rectangle.
+
 ### .colliderect()
 
 Test if two rectangles `overlap`.
