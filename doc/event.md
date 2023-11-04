@@ -39,7 +39,7 @@ Events support equality and inequality comparisons.
 Two events are equal if they are the same type and have identical attribute values.
 
 While debugging and experimenting, you can print an event object for a quick display of its type and members.  
-The function [pygame.event.event_name()](#eventname) can be used to get a string representing the name of the event type.
+The function [pygame.event.event_name()](#event_name) can be used to get a string representing the name of the event type.
 
 Events that come from the system will have a guaranteed set of member attributes based on the type.  
 The following is a list event types with their specific attributes.
