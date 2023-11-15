@@ -53,6 +53,11 @@ The following is a list event types with their specific attributes.
 |MOUSEMOTION|pos, rel, buttons, touch|
 |MOUSEBUTTONUP|pos, button, touch|
 |MOUSEBUTTONDOWN|pos, button, touch|
+|JOYAXISMOTION|instance_id, axis, value|
+|JOYBALLMOTION|instance_id, ball, rel|
+|JOYHATMOTION|instance_id, hat, value|
+|JOYBUTTONUP|instance_id, button|
+|JOYBUTTONDOWN|instance_id, button|
 |VIDEORESIZE|size, w, h|
 |VIDEOEXPOSE|none|
 |USEREVENT|code|
