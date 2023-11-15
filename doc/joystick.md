@@ -294,7 +294,7 @@ The controller is recognized as ***"Xbox 360 Controller"***.
 |D-pad|Up|10|
 ||Right|11|
 ||Down|12|
-||Right|13|
+||Left|13|
 
 ## Playstation 4 Controller (Not tested!)
 
