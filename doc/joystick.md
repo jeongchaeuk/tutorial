@@ -28,7 +28,7 @@ And in pygame 2, which supports hotplugging:
 
 Note that in pygame 2, joysticks events use a unique ***"instance ID"***.  
 The device index passed in the constructor to a Joystick object is not unique after devices have been added and removed.  
-You must call `Joystick.get_instance_id()` to find the instance ID that was assigned to a Joystick on opening.
+You must call [Joystick.get_instance_id()](#get_instance_id) to find the instance ID that was assigned to a Joystick on opening.
 
 The event queue needs to be pumped frequently for some of the methods to work.  
 So call one of `pygame.event.get`, `pygame.event.wait`, or `pygame.event.pump` regularly.
